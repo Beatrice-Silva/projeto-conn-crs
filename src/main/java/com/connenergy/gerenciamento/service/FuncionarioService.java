@@ -4,7 +4,9 @@
  */
 package com.connenergy.gerenciamento.service;
 
+import com.connenergy.gerenciamento.model.FuncionarioDTO;
 import com.connenergy.gerenciamento.respository.FuncionarioDAO;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ public class FuncionarioService {
     @Autowired
     private FuncionarioDAO repository;
     
-    
+    public List<FuncionarioDTO> lerTodos() {
+        return repository.lerTodos();
+    }
     
 }
