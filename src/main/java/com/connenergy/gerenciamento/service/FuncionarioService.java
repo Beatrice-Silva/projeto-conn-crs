@@ -24,4 +24,10 @@ public class FuncionarioService {
         return repository.lerTodos();
     }
     
+    public FuncionarioDTO lerPorId(int id){
+        return repository.lerPorId(id);
+    }
+    
+    
+    
 }

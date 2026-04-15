@@ -13,8 +13,8 @@ import java.sql.SQLException;
  * @author Aluno
  */
 public class Conexao {
-    public static final String url= "jdbc:mysql://localhost:3307/empresa";
-    public static final String user= "root";
+    public static final String url = "jdbc:mysql://localhost:3307/empresa";
+    public static final String user = "root";
     public static final String senha= "";
     private static Connection conn = null;
     
@@ -26,7 +26,7 @@ public class Conexao {
         
         try{
             if (conn == null || conn.isClosed()){
-               conn = DriverManager.getConnection(url, senha, user);
+               conn = DriverManager.getConnection(url,user, senha);
             }
             
         }catch(SQLException e){

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Aluno
  */
+//DAO = repository
 @Repository
 public class FuncionarioDAO {
     
@@ -54,5 +55,41 @@ public class FuncionarioDAO {
         return dados;
     }
     
+   
+      public FuncionarioDTO lerPorId(int id){
+        FuncionarioDTO funcionario = new FuncionarioDTO();
+        
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conn.prepareStatement("SELECT * FROM funcionario WHERE id = ?");
+            
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+
+                funcionario.setId(rs.getInt("id"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setCargo(rs.getString("cargo"));
+                funcionario.setDepartamento(rs.getString("departamento"));
+                funcionario.setEmail(rs.getString("email"));
+                funcionario.setData_contratacao(rs.getDate("data_contratacao"));
+            }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        
+        return funcionario;
     
+    
+    }
+      
 }
+    
+    
+    
+    
+
