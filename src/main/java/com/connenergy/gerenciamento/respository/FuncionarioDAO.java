@@ -85,44 +85,46 @@ public class FuncionarioDAO {
         return funcionario;
 
     }
-      
-      
-        public List<FuncionarioDTO> lerRecentes(){
-              List<FuncionarioDTO> recenteslista = new ArrayList();
-        
+ 
+         public void atualizar(FuncionarioDTO funcionario){
+            try{
+            Connection conn =Conexao.conectar();
+            PreparedStatement stmt = null;            
+           
+            stmt = conn.prepareStatement("UPDATE funcionario SET nome= ?, cargo=?, departamento=?, email=?, data_contratacao=? WHERE id=?");
+            stmt.setString(1, funcionario.getNome());
+            stmt.setString(2, funcionario.getCargo());
+            stmt.setString(3, funcionario.getDepartamento());
+            stmt.setString(4, funcionario.getEmail());
+            stmt.setDate(5, funcionario.getData_contratacao());
+            stmt.setInt(6, funcionario.getId());
+            stmt.executeUpdate();
+           
+        }catch(SQLException e){
+            e.printStackTrace();
+        }    
+    } 
+ 
+    public void adicionar(FuncionarioDTO funcionario){
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
-            ResultSet rs = null;
             
-            stmt = conn.prepareStatement("select * from funcionario ORDER BY data_contratacao DESC");
-            rs = stmt.executeQuery();
+            stmt = conn.prepareStatement("INSERT INTO funcionarios (nome, cargo, departamento, email, data_contratacao)"
+                    + "VALUES (?,?,?,?,?)");
+            stmt.setString(1,funcionario.getNome());
+            stmt.setString(2,funcionario.getCargo());
+            stmt.setString(3,funcionario.getDepartamento());
+            stmt.setString(4,funcionario.getEmail());
+            stmt.setDate(5,funcionario.getData_contratacao());
             
-            while(rs.next()){
-                
-                FuncionarioDTO funcionario = new FuncionarioDTO();
-                funcionario.setId(rs.getInt("id"));
-                funcionario.setNome(rs.getString("nome"));
-                funcionario.setCargo(rs.getString("cargo"));
-                funcionario.setDepartamento(rs.getString("departamento"));
-                funcionario.setEmail(rs.getString("email"));
-                
-                funcionario.setData_contratacao(rs.getDate("data_contratacao"));
-                
-                recenteslista.add(funcionario);
-                
-            }
+            stmt.executeUpdate();
             
         }catch(SQLException e){
             e.printStackTrace();
         }
-
-        return recenteslista;
+    
     }
               
 }
-    
-    
-    
-    
-
+   

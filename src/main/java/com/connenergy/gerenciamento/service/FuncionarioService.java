@@ -28,9 +28,20 @@ public class FuncionarioService {
         return repository.lerPorId(id);
     }
     
-    public List<FuncionarioDTO> lerRecentes() {
-        return repository.lerRecentes();
+    public void adicionar(FuncionarioDTO funcionario){
+        repository.adicionar(funcionario);
     }
     
+      public void editarFuncionario(FuncionarioDTO funcionario) {
+        repository.editar(funcionario);
+    }
+      
+
+    public void atualizar(FuncionarioDTO funcionario){
+        repository.atualizar(funcionario);
+    }
+  
+    
+  
     
 }

@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -27,30 +30,37 @@ public class FuncionarioController {
     
     @GetMapping("/funcionarios")
     public String getFuncionarios(Model model){
-        
         List<FuncionarioDTO> lista = service.lerTodos(); 
         model.addAttribute("lista",lista);
         return "funcionarios";
-    
     }
-     
     
     @GetMapping("/perfil")
     public String perfil(@RequestParam int id, Model model){
         FuncionarioDTO funcionario = service.lerPorId(id);
         model.addAttribute("funcionario", funcionario);
         return "perfil";
-    
     }
     
-    
-    @GetMapping("/funcionarios/recentes")
-    public String  novosContratados (Model model){
-        
-        List<FuncionarioDTO> recenteslista = service.lerRecentes();
-        model.addAttribute("recentes", recenteslista); 
-        return "recentes";
+    @PutMapping("/adicionar-novo")
+    public String adicionarNovo(Model model){
+        FuncionarioDTO funcionario = new FuncionarioDTO();
+        model.addAttribute("funcionario", funcionario);
+        return "/adicionar-novo";  
     }
+    
+    @PostMapping("/salvar")
+    public String salvar(@ModelAttribute FuncionarioDTO funcionario){
+        service.editarFuncionario(funcionario);
+        return "redirect:/funcionarios";        
+    }
+
+    @PutMapping("/adciionar")
+    public String adicionar(@ModelAttribute FuncionarioDTO funcionario){
+        service.adicionar(funcionario);
+        return "redirect:/funcionarios";  
+    }
+    
     
 
 }
