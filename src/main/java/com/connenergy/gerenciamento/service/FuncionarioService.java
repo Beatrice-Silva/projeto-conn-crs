@@ -28,6 +28,9 @@ public class FuncionarioService {
         return repository.lerPorId(id);
     }
     
+    public List<FuncionarioDTO> lerRecentes() {
+        return repository.lerRecentes();
+    }
     
     
 }

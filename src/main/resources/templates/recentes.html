@@ -3,34 +3,28 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Ficha única</title>
+        <title>Recentes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    
     <body>
-      <nav>
+  <nav>
         <a th:href="@{/funcionarios}">Tabela Geral</a> 
         <a th:href="@{/painel}">Painel</a> 
         <a th:href="@{/equipe-ti}">Equipe de TI</a> 
         <a th:href="@{/funcionarios/recentes}">Contratados Recentes</a>
     </nav>
-        
-        <div>
-        
-            <h2> Nome do Usuário: <span th:text="${funcionario.nome}"></span></h2>
-            
-            <h3> E-mail: <span th:text="${funcionario.email}"></span></h3>
-            <h3> Cargo: <span th:text="${funcionario.cargo}"></span></h3>
-            <h3> Data de Contratação: <span th:text="${funcionario.data_contratacao}"></span></h3>
-            
-                
-            
-        </div>
-    
-        <a th:href="@{/funcionarios}">Voltar para a lista</a>
+    <hr>
+
+    <h1>Nossos Novos Talentos</h1>
+
+    <ul>
+        <li th:each="f : ${recentes}">
+            <strong th:text="${f.nome}"></strong> - 
+            Contratado em: <span th:text="${#dates.format(f.data_contratacao, 'dd/MM/yyyy')}"></span>
+        </li>
+    </ul>
     </body>
-    
 </html>

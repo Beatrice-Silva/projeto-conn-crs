@@ -44,6 +44,13 @@ public class FuncionarioController {
     }
     
     
+    @GetMapping("/funcionarios/recentes")
+    public String  novosContratados (Model model){
+        
+        List<FuncionarioDTO> recenteslista = service.lerRecentes();
+        model.addAttribute("recentes", recenteslista); 
+        return "recentes";
+    }
     
 
 }

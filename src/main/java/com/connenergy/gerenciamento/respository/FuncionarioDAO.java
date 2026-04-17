@@ -83,10 +83,43 @@ public class FuncionarioDAO {
             }
         
         return funcionario;
-    
-    
+
     }
       
+      
+        public List<FuncionarioDTO> lerRecentes(){
+              List<FuncionarioDTO> recenteslista = new ArrayList();
+        
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conn.prepareStatement("select * from funcionario ORDER BY data_contratacao DESC");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                FuncionarioDTO funcionario = new FuncionarioDTO();
+                funcionario.setId(rs.getInt("id"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setCargo(rs.getString("cargo"));
+                funcionario.setDepartamento(rs.getString("departamento"));
+                funcionario.setEmail(rs.getString("email"));
+                
+                funcionario.setData_contratacao(rs.getDate("data_contratacao"));
+                
+                recenteslista.add(funcionario);
+                
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return recenteslista;
+    }
+              
 }
     
     

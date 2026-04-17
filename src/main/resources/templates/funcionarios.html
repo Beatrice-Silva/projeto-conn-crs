@@ -14,6 +14,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     
     <body>
         
+          <nav>
+        <a th:href="@{/funcionarios}">Tabela Geral</a> 
+        <a th:href="@{/painel}">Painel</a> 
+        <a th:href="@{/equipe-ti}">Equipe de TI</a> 
+        <a th:href="@{/funcionarios/recentes}">Contratados Recentes</a>
+        </nav>
+        
         <h1>Lista de funcionários na empresa:</h1>
 
         <table>
@@ -38,11 +45,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <a th:href="@{/perfil(id=${f.id})}">Editar</a>
                 </td> 
             </tr>
-            
         </table>
-        
-        
-        
-        
     </body>
 </html>
